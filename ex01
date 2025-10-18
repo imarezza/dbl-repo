@@ -1,0 +1,36 @@
+1.
+SELECT lastname 
+FROM saleslt.customer
+WHERE lastname like '%a'
+or lastname like '%b'
+or lastname like '%c'
+or lastname like '%d'
+or lastname like '%e'
+or lastname like '%f';
+
+2.
+SELECT a.City,
+       COUNT(c.CustomerID) AS NumberOfCustomers
+FROM SalesLT.Address AS a
+JOIN SalesLT.CustomerAddress AS ca
+    ON a.AddressID = ca.AddressID
+JOIN SalesLT.Customer AS c
+    ON ca.CustomerID = c.CustomerID
+GROUP BY a.City
+ORDER BY NumberOfCustomers DESC;
+
+3.
+SELECT 
+    h.SalesOrderID,         
+    h.OrderDate,            
+    SUM(d.OrderQty) AS TotalItems  
+FROM 
+    SalesLT.SalesOrderHeader h
+JOIN 
+    SalesLT.SalesOrderDetail d
+    ON h.SalesOrderID = d.SalesOrderID
+GROUP BY 
+    h.SalesOrderID, 
+    h.OrderDate
+ORDER BY 
+    h.OrderDate;
