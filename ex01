@@ -34,3 +34,21 @@ GROUP BY
     h.OrderDate
 ORDER BY 
     h.OrderDate;
+4.
+SELECT TOP 10
+    c.CustomerID,
+    c.FirstName,
+    c.LastName,
+    SUM(d.UnitPrice * d.OrderQty) AS TotalSpent
+FROM 
+    SalesLT.Customer c
+JOIN 
+    SalesLT.SalesOrderHeader h
+    ON c.CustomerID = h.CustomerID
+JOIN 
+    SalesLT.SalesOrderDetail d
+    ON h.SalesOrderID = d.SalesOrderID
+GROUP BY 
+    c.CustomerID, c.FirstName, c.LastName
+ORDER BY 
+    TotalSpent DESC;
